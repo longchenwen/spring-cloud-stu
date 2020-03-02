@@ -102,4 +102,6 @@ eureka:
     lease-expiration-duration-in-seconds: 2
 ```
 
+## 5.zookeeper服务注册服务(待)
 
+## 6.Consul服务注册中心(待)
