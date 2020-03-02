@@ -161,6 +161,27 @@ eureka:
  2. Hystrix解决的问题:
   * 1.断路器
   * 2.服务降级
+        ```
+        
+        什么是服务降级:当服务器压力剧增的情况下，根据当前业务情况及流量对一些服务和页面有策略的降级， 以此释放服务器资源以保证核心任务的正常运行。
+        即:提升客户体验不能一直在等待中.
+        例子:12306抢不票->返回正在排队中
+        ```
   * 3.服务雪崩效应
   * 4.服务熔断
+    ```
+      目的:保护服务
+      理解:就是在服务达到一定的峰值的时候用,自动开启服务保护功能(服务熔断需要设置),启用服务降级服务方式,返回一个结果
+    ```
   * 5.服务隔离机制
+  
+  3. hystrix 配置:
+  ```
+    # 设置熔断超时时间
+    hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds=10000
+    # 关闭Hystrix功能（不要和上面的配置一起使用）
+    feign.hystrix.enabled=false
+    # 关闭熔断功能
+    hystrix.command.default.execution.timeout.enabled=false
+  ```
+  **@hystrixcommand注解(写在方法上面)**:默认开始线程池隔离,默认开启服务熔断,默认开启服务降级
