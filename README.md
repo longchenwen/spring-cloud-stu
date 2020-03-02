@@ -113,13 +113,27 @@ eureka:
  既请求有nginx服务器端进行转发。
    * Ribbon是从eureka注册中心服务器端上获取服务注册信息列表，缓存到本地，让后在本地实现轮训负载均衡策略。
  既在客户端实现负载均衡
+ 
+ 2. Ribbon超时时间(开启feign 就的默认开始ribbon)配置:
+ ```
+  ###设置feign客户端超时时间
+  ribbon:
+  ###指的是建立连接所用的时间，适用于网络状况正常的情况下，两端连接所用的时间。
+   ReadTimeout: 5000
+  ###指的是建立连接后从服务器读取到可用资源所用的时间。 
+   ConnectTimeout: 5000
 
-## 8.Feign客户端调用工具(相当springmvc)
+ ```
+
+## 8.Feign客户端调用工具(相当springmvc,***Feign是对Ribbon和Hystrix的整合***)
+
 1. Feign介绍:Feign客户端是一个web声明式http远程调用工具，提供了接口和注解方式进行调用。
+
+2.Feign超时设置:
 
 ## 9.SpringCloud之熔断器Hystrix
 
-1.Hystrix介绍:
+1.Hystrix介绍:</br>
   SpringCloud 是微服务中的翘楚，最佳的落地方案。
 
   在微服务架构中多层服务之间会相互调用，如果其中有一层服务故障了，可能会导致一层服务或者多层服务
