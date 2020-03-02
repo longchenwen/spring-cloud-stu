@@ -42,8 +42,8 @@ server:
   port: 8090
 ```
 ## 3.服务间的相互调用
-1.所有的服务都是注册到eureka服务注册器中
-2.服务间的调用才用的是RestTemplate这个类
+* 1.所有的服务都是注册到eureka服务注册器中
+* 2.服务间的调用才用的是RestTemplate这个类
     ```
         需要注意几点:
         1.RestTemplate这个类要注册时spring容器中:
