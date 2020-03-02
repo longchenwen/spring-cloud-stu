@@ -6,10 +6,12 @@
 spring:
   application:
     name: eureka-server
+    
 
 eureka:
   server:
-    enable-self-preservation: false #关闭自我保护机制
+    enable-self-preservation: false #关闭自我保护机制,一般本地关闭,线上开始
+    eviction-interval-timer-in-ms: 2000 # 失效2s剔除服务
   client:
     service-url:
       defaultZone: http://localhost:8080/eureka,http://localhost:8082/eureka
@@ -63,3 +65,41 @@ server:
             }
     ```
 ## 4.eureka的自我保护机制
+
+1. server端自我保护机制的设置
+```
+eureka:
+  server:
+    enable-self-preservation: false # 关闭自我保护的机制
+    eviction-interval-timer-in-ms: 2000 # 失效2s剔除服务
+  instance:
+    #注册的ip地址 强调是ip书写格式
+    hostname: 127.0.0.1
+    prefer-ip-address: false
+  client:
+    fetch-registry: true
+    register-with-eureka: false #不把自己作为一个客户端注册到自己身上 集群是ture
+    service-url:
+      defaultZone: http://localhost:8081/eureka,http://localhost:8082/eureka``
+
+```
+2. client端自我保护机制的设置
+
+```
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka, http://localhost:8080/eureka, http://localhost:8082/eureka
+    # 把自己注册 到euraka服务上去
+    register-with-eureka: true
+    # 检索服务,就是找服务
+    fetch-registry: true
+
+  instance:
+    #心跳检测检测与续约时间,Eureka客户端向eureka server服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会按照该规则）
+    lease-renewal-interval-in-seconds: 1
+    #Eureka客户端向服务端发送心跳的时间间隔，单位为秒（客户端告诉服务端自己会按照该规则）
+    lease-expiration-duration-in-seconds: 2
+```
+
+
