@@ -122,6 +122,17 @@ eureka:
    ReadTimeout: 5000
   ###指的是建立连接后从服务器读取到可用资源所用的时间。 
    ConnectTimeout: 5000
+   
+  #设置连接超时时间
+  ribbon.ConnectTimeout=600
+  # 设置读取超时时间
+  ribbon.ReadTimeout=6000
+  # 对所有操作请求都进行重试
+  ribbon.OkToRetryOnAllOperations=true
+  # 切换实例的重试次数
+  ribbon.MaxAutoRetriesNextServer=2
+  # 对当前实例的重试次数
+  ribbon.MaxAutoRetries=1
 
  ```
 
@@ -130,6 +141,7 @@ eureka:
 1. Feign介绍:Feign客户端是一个web声明式http远程调用工具，提供了接口和注解方式进行调用。
 
 2.Feign超时设置:
+   
 
 ## 9.SpringCloud之熔断器Hystrix
 
@@ -145,3 +157,10 @@ eureka:
   情况进行熔断保护。保护的方法就是使用 Fallback，当调用的服务出现故障时，就可以使用 Fallback 方法的
 
   返回值；Hystrix 间隔时间会再次检查故障的服务，如果故障服务恢复，将继续使用服务。
+  
+ 2. Hystrix解决的问题:
+  * 1.断路器
+  * 2.服务降级
+  * 3.服务雪崩效应
+  * 4.服务熔断
+  * 5.服务隔离机制
