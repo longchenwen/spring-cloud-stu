@@ -185,3 +185,5 @@ eureka:
     hystrix.command.default.execution.timeout.enabled=false
   ```
   **@hystrixcommand注解(写在方法上面)**:默认开始线程池隔离,默认开启服务熔断,默认开启服务降级
+  
+  ## 10.springcloud-config 配置中心(待)
