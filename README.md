@@ -41,3 +41,24 @@ eureka:
 server:
   port: 8090
 ```
+## 3.服务间的相互调用
+1.所有的服务都是注册到eureka服务注册器中
+2.服务间的调用才用的是RestTemplate这个类
+    ```
+        需要注意几点:
+        1.RestTemplate这个类要注册时spring容器中:
+        
+        @SpringBootApplication
+        @EnableEurekaClient
+        public class EurekaClient1Application {
+
+            public static void main(String[] args) {
+                SpringApplication.run(EurekaClient1Application.class, args);
+            }
+
+            @Bean
+            @LoadBalanced //使用的意义是:在访问注册到eureka的服务,可以使用别名访问,还用负载均衡的意义
+            public RestTemplate restTemplate(){
+                return new RestTemplate();
+            }
+    ```
