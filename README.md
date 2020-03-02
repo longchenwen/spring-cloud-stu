@@ -62,3 +62,4 @@ server:
                 return new RestTemplate();
             }
     ```
+## 4.eureka的自我保护机制
